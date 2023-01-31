@@ -8,7 +8,7 @@ const Articles = ({articles}) => {
             {
                 articles.items.map((article) => (
                     <div key={article.sys.id}>
-                        <Link href={''}>
+                        <Link href={'/articles/'+article.sys.id}>
                             <h3>{article.fields.title}</h3>
                             <Image 
                                 src={'https:' + article.fields.image.fields.file.url}

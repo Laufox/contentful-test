@@ -45,3 +45,13 @@ export const getContentFulArticles = async () => {
   return articles
 
 }
+
+export const getContentFulArticle = async (id) => {
+
+  const client = getClient()
+
+  const article = await client.getEntry(id)
+
+  return article
+
+}

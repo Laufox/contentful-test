@@ -4,6 +4,7 @@ import {getContentFulNavbar, getContentFulHero, getContentFulArticles} from '../
 import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
 import Articles from '@/components/Articles'
+import Link from 'next/link'
 
 export const getStaticProps = async () => {
   
@@ -33,9 +34,7 @@ export default function Home({elements}) {
       </Head>
       <Layout navbar={elements.navbar}>
         <Hero hero={elements.hero} />
-        {
-          elements.articles.total && <Articles articles={elements.articles} />
-        }
+        <Link href='/articles'>Se all of our articles</Link>
       </Layout>
       
     </>

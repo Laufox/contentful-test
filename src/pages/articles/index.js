@@ -29,10 +29,12 @@ const articles = ({elements}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout navbar={elements.navbar}>
-        <h2>Our articles</h2>
-        {
-          elements.articles.total && <Articles articles={elements.articles} />
-        }
+        <div className='p-4'>
+            <h2 className='text-3xl font-bold mb-4'>Our articles</h2>
+            {
+            elements.articles.total && <Articles articles={elements.articles} />
+            }
+        </div>
       </Layout>
       
     </>

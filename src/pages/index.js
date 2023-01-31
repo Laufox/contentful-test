@@ -34,7 +34,19 @@ export default function Home({elements}) {
       </Head>
       <Layout navbar={elements.navbar}>
         <Hero hero={elements.hero} />
-        <Link href='/articles'>Se all of our articles</Link>
+        <Link 
+          href='/articles'
+          className='
+            text-lg
+          text-sky-600
+            hover:text-sky-400
+            underline
+            m-5
+            inline-block
+          '
+        >
+          Se all of our articles
+        </Link>
       </Layout>
       
     </>

@@ -50,16 +50,17 @@ const article = ({article, navbar}) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Layout navbar={navbar}>
-                <div>
-                    <h1>{article.fields.title}</h1>
+                <div className='p-4 w-1/2'>
+                    <h1 className='text-3xl font-bold mb-4'>{article.fields.title}</h1>
                     <Image 
                         src={'https:' + article.fields.image.fields.file.url}
                         width={article.fields.image.fields.file.details.image.width}
                         height={article.fields.image.fields.file.details.image.height}
                         alt={`${article.fields.title} image`}
                         priority
+                        className='h-96'
                     />
-                    <h2>{article.fields.subheading}</h2>
+                    <h2 className='text-lg font-bold mt-1.5 mb-3'>{article.fields.subheading}</h2>
                     <p>{article.fields.text}</p>
                 </div>
             </Layout>

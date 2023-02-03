@@ -1,28 +1,62 @@
 import Head from 'next/head'
-
+import { createClient } from "contentful"
+import { createElement } from "react"
 import {getContentFulNavbar, getContentFulHero, getContentFulArticles} from '../lib/api'
 import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
-import Articles from '@/components/Articles'
+import Card from "@/components/Card"
+import Test from "@/components/Test"
+import Articles from "@/components/Articles"
 import Link from 'next/link'
+import Product from '@/components/Product'
 
-export const getStaticProps = async () => {
+const components = {
+  test: Test,
+  card: Card,
+  hero: Hero,
+  article: Articles,
+  product: Product
+}
+
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+})
+
+const getComponent = (item) => {
+
+  console.log('hellooooooo', item)
+
+  return createElement(components[item.sys.contentType.sys.id], {
+      item,
+      key: item.sys.id
+  })
+
+}
+
+export const getStaticProps = async (context) => {
+
+  const pages = await client.getEntries({
+    content_type: 'page',
+    'fields.slug': '/'
+  })
+
+  console.log("pages", pages)
+
+  const navbar = await getContentFulNavbar()
   
   return {
     props: {
-      elements: {
-        navbar: await getContentFulNavbar(),
-        hero: await getContentFulHero(),
-        articles: await getContentFulArticles()
-      }
+        navbar,
+        pages
     }
   }
 
 }
 
-export default function Home({elements}) {
+export default function Home(props) {
 
-  console.log(elements.articles)
+  console.log(props.pages.items[0].fields.sections)
 
   return (
     <>
@@ -32,8 +66,8 @@ export default function Home({elements}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout navbar={elements.navbar}>
-        <Hero hero={elements.hero} />
+      <Layout navbar={props.navbar}>
+        {props.pages.items[0].fields.sections.map(item => getComponent(item))}
         <Link 
           href='/articles'
           className='

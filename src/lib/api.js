@@ -1,4 +1,7 @@
 import { createClient } from 'contentful'
+import { createElement } from 'react'
+import Card from "@/components/Card"
+import Test from "@/components/Test"
 
 const getClient = () => {
 
@@ -53,5 +56,21 @@ export const getContentFulArticle = async (id) => {
   const article = await client.getEntry(id)
 
   return article
+
+}
+
+const components = {
+  test: Test,
+  card: Card
+}
+
+export const getComponent = (item) => {
+
+  console.log('hellooooooo', item)
+
+    return createElement(components[item.sys.contentType.sys.id], {
+        card: item,
+        key: item.sys.id
+    })
 
 }

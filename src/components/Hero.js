@@ -1,11 +1,13 @@
 import Image from "next/image"
 
-const Hero = ({hero}) => {
+const Hero = ({item}) => {
 
-    console.log(hero)
+    const hero = item
+
+    console.log("hero: ", hero)
 
     return (
-        <div className="relative">
+        <div className="relative" data-sb-object-id={hero.sys.id}>
             <Image
                 src={'https:' + hero.fields.image.fields.file.url}
                 width={hero.fields.image.fields.file.details.image.width}
@@ -28,6 +30,7 @@ const Hero = ({hero}) => {
                 "
             >
                 <h1 
+                    data-sb-field-path="title"
                     className="
                         text-xl
                         sm:text-3xl
@@ -39,6 +42,7 @@ const Hero = ({hero}) => {
                     {hero.fields.title}
                 </h1>
                 <p 
+                    data-sb-field-path="subheading"
                     className="
                         text-lg
                         sm:text-xl
@@ -50,6 +54,7 @@ const Hero = ({hero}) => {
                     {hero.fields.subheading}
                 </p>
                 <button
+                    data-sb-field-path="cta"
                     className="
                         py-1
                         md:py-1.5
